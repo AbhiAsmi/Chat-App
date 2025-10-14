@@ -14,8 +14,6 @@ const Navbar = () => {
     <nav className="bg-gray-900 border-b border-gray-700 sticky top-0 z-30 h-16 flex items-center">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between w-full">
-          
-          {/* App Logo / Name */}
           {isChatPage && (
             <div className="pl-2 sm:pl-5">
               <Link to="/" className="flex items-center gap-2.5">
@@ -56,7 +54,6 @@ const Navbar = () => {
               </div>
             )}
 
-            {/* Logout Button */}
             {authUser && (
               <button
                 className="btn btn-ghost btn-circle"

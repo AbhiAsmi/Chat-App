@@ -18,13 +18,13 @@ const SignUpPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col lg:flex-row items-center justify-center p-4 lg:p-8 relative overflow-hidden">
-      {/* BACKGROUND GRADIENT */}
+      
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-[#1a0f2b] to-black opacity-70"></div>
 
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl mx-auto gap-12 lg:gap-16">
-        {/* LEFT SIDE - FORM */}
+    
         <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left p-4">
-          {/* LOGO */}
+         
           <div className="flex items-center mb-10 self-start lg:self-auto">
             <img
               src="Screenshot 2025-10-08 183910.png"
@@ -34,17 +34,14 @@ const SignUpPage = () => {
             <span className="text-xl font-bold">QUICKCONNECT</span>
           </div>
 
-          {/* TITLE */}
+          
           <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 leading-tight animate-fade-in-up">
             Create Your Account <br /> Join QuickConnect
           </h1>
-
-          {/* FORM */}
           <form
             onSubmit={handleSignup}
             className="w-full max-w-md bg-[#1a0f2b] rounded-lg p-6 space-y-4 animate-fade-in-up animation-delay-300 border border-transparent"
           >
-            {/* FULL NAME */}
             <div className="relative animate-input-pop">
               <input
                 type="text"
@@ -58,8 +55,6 @@ const SignUpPage = () => {
                 className="w-full p-3 pl-4 bg-[#2a174a] border border-[#5a3a8a] rounded-md focus:ring-2 focus:ring-cyan-400 focus:outline-none placeholder-gray-400 text-white transition-all duration-300"
               />
             </div>
-
-            {/* EMAIL */}
             <div className="relative animate-input-pop animation-delay-100">
               <input
                 type="email"
@@ -74,7 +69,6 @@ const SignUpPage = () => {
               />
             </div>
 
-            {/* PASSWORD */}
             <div className="relative animate-input-pop animation-delay-200">
               <input
                 type="password"
@@ -91,8 +85,6 @@ const SignUpPage = () => {
                 Password must be at least 6 characters long
               </p>
             </div>
-
-            {/* TERMS */}
             <div className="form-control">
               <label className="label cursor-pointer justify-start gap-2">
                 <input type="checkbox" className="checkbox checkbox-sm" required />
@@ -104,11 +96,8 @@ const SignUpPage = () => {
                 </span>
               </label>
             </div>
-
-            {/* ERROR MESSAGE */}
             {error && <p className="text-sm text-red-400">{error.response?.data?.message || "Something went wrong"}</p>}
 
-            {/* SUBMIT BUTTON */}
             <button
               type="submit"
               disabled={isPending}
@@ -117,17 +106,14 @@ const SignUpPage = () => {
               {isPending ? "Creating Account..." : "Sign Up"}
             </button>
 
-            {/* LINK TO LOGIN */}
             <p className="text-gray-400 text-sm mt-4 text-center animate-fade-in animation-delay-400">
               Already have an account?{" "}
               <Link to="/login" className="text-teal-400 hover:underline">
-                Log in
+                Sign in
               </Link>
             </p>
           </form>
         </div>
-
-        {/* RIGHT SIDE - IMAGE */}
         <div className="flex-1 flex justify-center lg:justify-end mt-12 lg:mt-0 animate-scale-in">
           <img
             src="Screenshot 2025-10-08 183115.png"
