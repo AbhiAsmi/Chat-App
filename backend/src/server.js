@@ -17,6 +17,7 @@ const __dirname = path.resolve();
 const allowedOrigins = [
   "http://localhost:5173", 
   "https://chat-app-git-main-abhiasmis-projects.vercel.app", 
+  "chat-app-sigma-ten.vercel.app"
 ];
 
 app.use(
