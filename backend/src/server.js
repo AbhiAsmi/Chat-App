@@ -13,19 +13,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 const allowedOrigins = [
-  "http://localhost:5173",
+  "http://localhost:5173",  
+  "chat-app-sigma-ten.vercel.app"              
 ];
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-
-      if (!allowedOrigins.includes(origin)) {
-        return callback(new Error(`CORS error: Origin ${origin} not allowed`), false);
-      }
-      return callback(null, true);
-    },
-    credentials: true,
+    origin: allowedOrigins,
+    credentials: true, 
   })
 );
 app.use(express.json());
