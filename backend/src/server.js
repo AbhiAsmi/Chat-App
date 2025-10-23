@@ -14,7 +14,7 @@ const __dirname = path.resolve();
 app.set("trust proxy", 1);
 const allowedOrigins = [
   "http://localhost:5173",
-  "chat-app-dvb8.vercel.app"
+  "https://chat-app-dvb8.vercel.app"
 ];
 app.use(
   cors({
