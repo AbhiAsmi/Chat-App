@@ -2,13 +2,16 @@ import { upsertStreamUser } from "../lib/stream.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 const setTokenCookie = (res, token) => {
+  const isProduction = process.env.NODE_ENV === "production";
+
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production", 
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000, 
+    secure: isProduction,         
+    sameSite: isProduction ? "none" : "lax", 
+    maxAge: 7 * 24 * 60 * 60 * 1000,      
   });
 };
+
 
 export async function signup(req, res) {
   const { email, password, fullName } = req.body;
