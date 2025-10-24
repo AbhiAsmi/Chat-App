@@ -38,7 +38,7 @@ const OnboardingPage = () => {
   };
 
   const handleRandomAvatar = () => {
-    const idx = Math.floor(Math.random() * 100) + 1; // 1-100 included
+    const idx = Math.floor(Math.random() * 100) + 1; 
     const randomAvatar = `https://avatar.iran.liara.run/public/${idx}.png`;
 
     setFormState({ ...formState, profilePic: randomAvatar });
@@ -68,8 +68,6 @@ const OnboardingPage = () => {
                   </div>
                 )}
               </div>
-
-              {/* Generate Random Avatar BTN */}
               <div className="flex items-center gap-2">
                 <button type="button" onClick={handleRandomAvatar} className="btn btn-accent">
                   <ShuffleIcon className="size-4 mr-2" />
@@ -106,10 +104,7 @@ const OnboardingPage = () => {
                 placeholder="Tell others about yourself and your language learning goals"
               />
             </div>
-
-            {/* LANGUAGES */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* NATIVE LANGUAGE */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Native Language</span>
@@ -128,8 +123,6 @@ const OnboardingPage = () => {
                   ))}
                 </select>
               </div>
-
-              {/* LEARNING LANGUAGE */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Learning Language</span>
@@ -149,8 +142,6 @@ const OnboardingPage = () => {
                 </select>
               </div>
             </div>
-
-            {/* LOCATION */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Location</span>
@@ -167,8 +158,6 @@ const OnboardingPage = () => {
                 />
               </div>
             </div>
-
-            {/* SUBMIT BUTTON */}
 
             <button className="btn btn-primary w-full" disabled={isPending} type="submit">
               {!isPending ? (
