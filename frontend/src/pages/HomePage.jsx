@@ -8,12 +8,9 @@ import {
 } from "../lib/api";
 import { Link } from "react-router";
 import { CheckCircleIcon, MapPinIcon, UserPlusIcon, UsersIcon } from "lucide-react";
-
 import { capitialize } from "../lib/utils";
-
 import FriendCard, { getLanguageFlag } from "../components/FriendCard";
 import NoFriendsFound from "../components/NoFriendsFound";
-
 const HomePage = () => {
   const queryClient = useQueryClient();
   const [outgoingRequestsIds, setOutgoingRequestsIds] = useState(new Set());
@@ -113,10 +110,10 @@ const HomePage = () => {
                       <div className="flex items-center gap-3">
                         <div className="avatar size-16 rounded-full overflow-hidden">
                           <img
-                            src={user.profilePic || "/default-avatar.png"}
+                            src={user.profilePic || "/avatar.png"}
                             alt={user.fullName}
                             onError={(e) =>
-                              (e.currentTarget.src = "/default-avatar.png")
+                              (e.currentTarget.src = "/avatar.png")
                             }
                           />
                         </div>
@@ -131,8 +128,6 @@ const HomePage = () => {
                           )}
                         </div>
                       </div>
-
-                      {/* Languages with flags */}
                       <div className="flex flex-wrap gap-1.5">
                         <span className="badge badge-secondary">
                           {getLanguageFlag(user.nativeLanguage)}
@@ -145,8 +140,6 @@ const HomePage = () => {
                       </div>
 
                       {user.bio && <p className="text-sm opacity-70">{user.bio}</p>}
-
-                      {/* Action button */}
                       <button
                         className={`btn w-full mt-2 ${
                           hasRequestBeenSent ? "btn-disabled" : "btn-primary"
