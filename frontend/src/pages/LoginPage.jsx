@@ -17,13 +17,12 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col lg:flex-row items-center justify-center p-4 lg:p-8 relative overflow-hidden">
-      {/* BACKGROUND GRADIENT */}
+     
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-[#1a0f2b] to-black opacity-70"></div>
 
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl mx-auto gap-12 lg:gap-16">
-        {/* LEFT SIDE - FORM */}
+       
         <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left p-4">
-          {/* LOGO */}
           <div className="flex items-center mb-10 self-start lg:self-auto">
             <img
               src="Screenshot 2025-10-08 183910.png"
@@ -32,18 +31,16 @@ const LoginPage = () => {
             />
             <span className="text-xl font-bold">QUICKCONNECT</span>
           </div>
-
-          {/* TITLE */}
           <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 leading-tight animate-fade-in-up">
             Welcome Back <br /> Log in to Continue
           </h1>
 
-          {/* FORM */}
+       
           <form
             onSubmit={handleLogin}
             className="w-full max-w-md bg-[#1a0f2b] rounded-lg p-6 space-y-4 animate-fade-in-up animation-delay-300 border border-transparent"
           >
-            {/* EMAIL */}
+          
             <div className="relative animate-input-pop">
               <input
                 type="email"
@@ -58,7 +55,7 @@ const LoginPage = () => {
               />
             </div>
 
-            {/* PASSWORD */}
+         
             <div className="relative animate-input-pop animation-delay-100">
               <input
                 type="password"
@@ -85,7 +82,7 @@ const LoginPage = () => {
               {isPending ? "Logging in..." : "Login"}
             </button>
 
-            {/* LINK TO SIGNUP */}
+          
             <p className="text-gray-400 text-sm mt-4 text-center animate-fade-in animation-delay-400">
               Don't have an account?{" "}
               <Link to="/signup" className="text-teal-400 hover:underline">

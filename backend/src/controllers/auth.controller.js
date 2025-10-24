@@ -1,17 +1,16 @@
 import { upsertStreamUser } from "../lib/stream.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-const setTokenCookie = (res, token) => {
-  const isProduction = process.env.NODE_ENV === "production";
 
+const setTokenCookie = (res, token) => {
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: isProduction,         
-    sameSite: isProduction ? "none" : "lax", 
-    maxAge: 7 * 24 * 60 * 60 * 1000,      
+    secure: true,              
+    sameSite: "none",        
+    path: "/",           
+    maxAge: 7 * 24 * 60 * 60 * 1000, 
   });
 };
-
 
 export async function signup(req, res) {
   const { email, password, fullName } = req.body;
@@ -32,10 +31,10 @@ export async function signup(req, res) {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "Email already exists, please use a different one" });
+      return res.status(400).json({ message: "Email already exists" });
     }
 
-    const idx = Math.floor(Math.random() * 100) + 1; 
+    const idx = Math.floor(Math.random() * 100) + 1;
     const randomAvatar = `https://avatar.iran.liara.run/public/${idx}.png`;
 
     const newUser = await User.create({
@@ -54,12 +53,13 @@ export async function signup(req, res) {
     } catch (error) {
       console.log("Error creating Stream user:", error);
     }
+
     const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
     setTokenCookie(res, token);
 
     res.status(201).json({ success: true, user: newUser });
   } catch (error) {
-    console.log("Error in signup controller", error);
+    console.error("Error in signup controller:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
@@ -83,7 +83,7 @@ export async function login(req, res) {
 
     res.status(200).json({ success: true, user });
   } catch (error) {
-    console.log("Error in login controller", error.message);
+    console.error("Error in login controller:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
@@ -91,12 +91,12 @@ export async function login(req, res) {
 export function logout(req, res) {
   res.clearCookie("jwt", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: true,
+    sameSite: "none",
+    path: "/",
   });
   res.status(200).json({ success: true, message: "Logout successful" });
 }
-
 export async function onboard(req, res) {
   try {
     const userId = req.user._id;
@@ -128,9 +128,9 @@ export async function onboard(req, res) {
         name: updatedUser.fullName,
         image: updatedUser.profilePic || "",
       });
-      console.log(`Stream user updated after onboarding for ${updatedUser.fullName}`);
+      console.log(`Stream user updated for ${updatedUser.fullName}`);
     } catch (streamError) {
-      console.log("Error updating Stream user during onboarding:", streamError.message);
+      console.log("Error updating Stream user:", streamError.message);
     }
 
     res.status(200).json({ success: true, user: updatedUser });

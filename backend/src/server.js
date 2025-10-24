@@ -14,16 +14,16 @@ const __dirname = path.resolve();
 app.set("trust proxy", 1);
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://chat-app-dvb8.vercel.app"
+  "https://chat-app-dvb8.vercel.app",
 ];
 app.use(
   cors({
     origin: function (origin, callback) {
-
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.warn(" Blocked by CORS:", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
@@ -32,20 +32,27 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/chat", chatRoutes);
+app.options("*", cors());
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  const frontendPath = path.join(__dirname, "../frontend/dist");
+  app.use(express.static(frontendPath));
+
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+    res.sendFile(path.join(frontendPath, "index.html"));
   });
 }
-
-app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-  connectDB();
-});
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`✅ Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error(" DB Connection failed:", err);
+    process.exit(1);
+  });
